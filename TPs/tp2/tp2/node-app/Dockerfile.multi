@@ -1,0 +1,27 @@
+# builder 
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm test
+
+# production 
+FROM node:18-alpine
+WORKDIR /app
+
+RUN addgroup -g 1001 appuser \
+&& adduser -D -u 1001 -G appuser appuser
+
+COPY package*.json ./
+RUN npm install --omit=dev
+
+COPY --from=builder /app/app.js ./app.js
+
+
+RUN chown -R appuser:appuser /app
+
+USER appuser
+
+EXPOSE 3000
+CMD ["npm", "start"]

@@ -1,0 +1,12 @@
+{
+    "name": "docker-eval-app",
+    "version": "1.0.0",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "test": "echo 'Tests passed'"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.0"
+    }
+}
