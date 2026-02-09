@@ -1,0 +1,25 @@
+services:
+  api:
+    volumes:
+      - ./api:/app
+    command: sh -c "npm install && npm start"
+    labels:
+      - "env=dev"
+
+  db:
+    ports:
+      - "5432:5432"
+    labels:
+      - "env=dev"
+
+  adminer:
+    labels:
+      - "env=dev"
+
+  redis:
+    labels:
+      - "env=dev"
+
+  nginx:
+    labels:
+      - "env=dev"

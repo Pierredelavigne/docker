@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Evaluation Docker</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+        #result { background: #f5f5f5; padding: 20px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Docker Evaluation App</h1>
+        <button onclick="getStats()">Get Stats</button>
+        <button onclick="getUsers()">Get Users</button>
+        <button onclick="checkHealth()">Health Check</button>
+        <div id="result"></div>
+    </div>
+    <script>
+        async function getStats() {
+            const res = await fetch('/api/stats');
+            document.getElementById('result').innerHTML =
+                '<pre>' + JSON.stringify(await res.json(), null, 2) + '</pre>';
+        }
+        async function getUsers() {
+            const res = await fetch('/api/users');
+            document.getElementById('result').innerHTML =
+                '<pre>' + JSON.stringify(await res.json(), null, 2) + '</pre>';
+        }
+        async function checkHealth() {
+            const res = await fetch('/health');
+            document.getElementById('result').innerHTML =
+                '<pre>' + JSON.stringify(await res.json(), null, 2) + '</pre>';
+        }
+    </script>
+</body>
+</html>
